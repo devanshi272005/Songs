@@ -1,0 +1,39 @@
+import pygame
+import time
+import sys
+
+sys.stdout.reconfigure(encoding='utf-8')
+
+wav_path = "C:\\Users\\Asus\\OneDrive\\Documents\\Audacity\\Deewaniyat - Ek Deewane Ki Deewaniyat 128 Kbps.wav"
+
+# ✅ Lyrics 
+lyrics_words = [
+    "Tu", "hi", "armaan,", "Tu", "hi", "sach", "hai,", 
+    "Keh", "rahi", "deewaniyat", "hai,", 
+    "Main", "yeh", "dil", "pe", "likh", "chuka", "hoon,", 
+    "Tu", "mera", "hai,", "Tu", "mera", "hai,", 
+    "Tere", "aage", "zindagi", "ki", "khaakh", "jitni", "ahmiyat", "hai,", 
+    "Faisla", "main", "kar", "chuka", "hoon,", 
+    "Tu", "mera,", "main", "bhi", "hoon", "bas", "tera."
+]
+
+
+delay = 0.75  
+
+pygame.mixer.init()
+try:
+    pygame.mixer.music.load(wav_path)
+    pygame.mixer.music.play()
+    print("\n🎶 Now Playing: Deewaniyat\n")
+    print("📝 Lyrics (synchronized):\n")
+
+    for word in lyrics_words:
+        print(word, end=' ', flush=True)
+        time.sleep(delay)
+
+    print("\n\n✅ Lyrics finished.")
+    while pygame.mixer.music.get_busy():
+        time.sleep(1)
+
+except pygame.error as e:
+    print(f"⚠️ Error loading song: {e}")
